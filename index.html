@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Red 🌹</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap');
+
+        :root {
+            --primary: #9d1111;
+            --primary-light: #c81d1d;
+            --paper: #fffcf7;
+            --wax: #750a0a;
+            --heart-pink: #ff4d6d;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', serif;
+            margin: 0;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Ambient Floating Hearts Background */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 77, 109, 0.2);
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 0;
+            animation: float-around 20s linear infinite;
+        }
+
+        @keyframes float-around {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translate(100vw, -100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Subtle Paper Texture Overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.08;
+            pointer-events: none;
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+            z-index: 1000;
+        }
+
+        /* Envelope Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            cursor: pointer;
+            perspective: 1000px;
+            animation: float 4s ease-in-out infinite;
+            transition: all 0.5s ease;
+            z-index: 10;
+        }
+
+        .envelope-wrapper.open {
+            animation: none;
+            transform: translateY(60px);
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 25px 60px rgba(125, 10, 10, 0.4);
+            z-index: 10;
+            background-image: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(0,0,0,0.15) 100%);
+        }
+
+        /* Front flaps */
+        .envelope::after {
+            content: "";
+            position: absolute;
+            z-index: 20;
+            width: 0; height: 0;
+            border-top: 110px solid transparent;
+            border-left: 160px solid var(--primary-light);
+            border-right: 160px solid var(--primary-light);
+            border-bottom: 110px solid var(--primary-light);
+            bottom: 0;
+            border-radius: 0 0 6px 6px;
+            filter: drop-shadow(0 -3px 10px rgba(0,0,0,0.15));
+        }
+
+        /* Top Flap */
+        .flap {
+            position: absolute;
+            top: 0;
+            width: 0; height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 125px solid var(--primary);
+            transform-origin: top;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 40;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        /* Wax Seal with Heart Pulse */
+        .wax-seal {
+            position: absolute;
+            top: 105px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--wax);
+            border-radius: 50%;
+            z-index: 45;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 0 15px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffb3c1;
+            font-size: 28px;
+            transition: all 0.4s ease;
+            animation: seal-pulse 1.5s infinite;
+        }
+
+        @keyframes seal-pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+            50% { transform: translateX(-50%) scale(1.1); box-shadow: 0 0 25px var(--heart-pink); }
+        }
+
+        /* The Letter */
+        .letter {
+            position: absolute;
+            bottom: 15px;
+            left: 5%;
+            width: 90%;
+            height: 200px;
+            background: var(--paper);
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            border-radius: 4px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px double rgba(183, 28, 28, 0.1);
+        }
+
+        .letter h1 {
+            color: var(--primary);
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.9rem;
+            margin-bottom: 8px;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s ease;
+        }
+
+        .letter p {
+            color: #5d4037;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s ease;
+        }
+
+        /* Text: "To: Red" */
+        .to-red {
+            position: absolute;
+            top: 155px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            color: #fff;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            z-index: 50;
+            pointer-events: none;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+            letter-spacing: 2px;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Toggle States */
+        .open .flap { 
+            transform: rotateX(180deg); 
+            z-index: 0; 
+        }
+        .open .wax-seal { 
+            opacity: 0; 
+            transform: translateX(-50%) scale(0); 
+            pointer-events: none;
+        }
+        .open .letter { 
+            transform: translateY(-170px) rotate(-1.5deg); 
+            z-index: 25; 
+        }
+        .open .letter h1, .open .letter p { 
+            opacity: 1; 
+            transform: translateY(0); 
+            transition-delay: 0.4s;
+        }
+        .open .to-red { 
+            opacity: 0; 
+        }
+
+        /* Rose & Heart Particles */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            animation: fall-swing linear forwards;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+        }
+
+        @keyframes fall-swing {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; transform: translateY(0) rotate(20deg) scale(1); }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(40px); opacity: 0; }
+        }
+
+        #tap-hint {
+            position: absolute;
+            bottom: -90px;
+            width: 100%;
+            text-align: center;
+            color: var(--primary);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            transition: opacity 0.3s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Corner Decorations */
+        .corner-deco {
+            position: fixed;
+            width: 150px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .top-left { top: 0; left: 0; transform: rotate(0deg); }
+        .bottom-right { bottom: 0; right: 0; transform: rotate(180deg); }
+    </style>
+</head>
+<body>
+
+    <!-- Corner Decor -->
+    <svg class="corner-deco top-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0C50 0 100 50 100 100" stroke="#9d1111" stroke-width="2" stroke-dasharray="4 4"/>
+        <text x="10" y="30" fill="#9d1111" font-size="20">🌹</text>
+        <text x="40" y="15" fill="#9d1111" font-size="15">❤</text>
+    </svg>
+    <svg class="corner-deco bottom-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0C50 0 100 50 100 100" stroke="#9d1111" stroke-width="2" stroke-dasharray="4 4"/>
+        <text x="10" y="30" fill="#9d1111" font-size="20">🌹</text>
+    </svg>
+
+    <div class="envelope-wrapper" id="envelope">
+        <div class="flap"></div>
+        <div class="wax-seal">❤</div>
+        <div class="envelope">
+            <div class="to-red">To: Red</div>
+            <div class="letter">
+                <div class="text-pink-200 text-xs mb-2">❤ ❤ ❤</div>
+                <h1>Happy Valentine's Day, Red</h1>
+                <p>You're always amazing</p>
+                <div class="mt-4 text-4xl animate-bounce">🌹</div>
+            </div>
+        </div>
+        <div id="tap-hint">Tap to Open My Message</div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="bgm" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/02/07/audio_f523f03b22.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sfx">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Background Heart Generation
+        function createBackgroundHearts() {
+            for(let i=0; i<15; i++) {
+                const h = document.createElement('div');
+                h.className = 'bg-heart';
+                h.innerHTML = Math.random() > 0.5 ? '❤' : '💖';
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.top = Math.random() * 100 + 'vh';
+                h.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                h.style.animationDelay = (Math.random() * 10) + 's';
+                document.body.appendChild(h);
+            }
+        }
+        createBackgroundHearts();
+
+        const envelope = document.getElementById('envelope');
+        const bgm = document.getElementById('bgm');
+        const sfx = document.getElementById('sfx');
+        const hint = document.getElementById('tap-hint');
+        let isOpened = false;
+        let musicStarted = false;
+
+        envelope.addEventListener('click', () => {
+            isOpened = !isOpened;
+
+            if (isOpened) {
+                envelope.classList.add('open');
+                hint.textContent = "Tap to Close My Message";
+                // Start background music on first click
+                if (!musicStarted) {
+                    bgm.volume = 0.4;
+                    bgm.play().catch(() => {});
+                    musicStarted = true;
+                }
+                // Premium Valentine burst
+                createValentineBurst();
+            } else {
+                envelope.classList.remove('open');
+                hint.textContent = "Tap to Open My Message";
+            }
+
+            // Play interaction sound effect
+            sfx.currentTime = 0;
+            sfx.play().catch(() => {});
+        });
+
+        function createValentineBurst() {
+            const items = ['🌹', '🌹', '💖', '💝', '✨', '🌸', '💘', '🤍'];
+            const count = 70;
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 'particle';
+                    el.textContent = items[Math.floor(Math.random() * items.length)];
+                    
+                    const startPos = Math.random() * 100;
+                    el.style.left = startPos + 'vw';
+                    el.style.fontSize = (Math.random() * 25 + 20) + 'px';
+                    
+                    const duration = Math.random() * 3 + 4;
+                    el.style.animationDuration = duration + 's';
+                    
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), duration * 1000);
+                }, i * 30); // Faster burst on toggle
+            }
+        }
+    </script>
+</body>
+</html>
